@@ -1,0 +1,35 @@
+name: Model CI Pipeline
+
+# Trigger: When do we run this?
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test_pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Download the code
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # 2. Install Python
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"
+
+    # 3. Install dependencies
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest httpx  # Ensure test tools are installed
+
+    # 4. Run the Tests
+    - name: Run Tests
+      run: |
+        python -m pytest
