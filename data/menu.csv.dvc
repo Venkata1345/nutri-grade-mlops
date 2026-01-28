@@ -1,0 +1,5 @@
+outs:
+- md5: fc53cd270458d09de4b7a9c8ec83ca1a
+  size: 12476
+  hash: md5
+  path: menu.csv
